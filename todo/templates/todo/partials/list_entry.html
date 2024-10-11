@@ -1,0 +1,13 @@
+{% load static %}
+<li id="list{{ list.id }}" class="list-group-item d-flex justify-content-between align-items-center">
+    <div class="ms-2 me-auto">
+        <a href="{% url 'todo:detail' list.slug %}"
+           class="fw-bold btn-link disabled">{{ list.title }}
+        </a>
+    </div>
+    <span class="badge text-bg-primary rounded-pill ">{{ list.formatted_progress }}</span>
+    <a hx-get="{% url 'todo:delete_list' list.id %}" class="ms-2 btn btn-danger" hx-target="#list{{ list.id }}"
+       hx-swap="delete">
+        <img src="{% static 'icons/trash.svg' %}" alt="Remover">
+    </a>
+</li>

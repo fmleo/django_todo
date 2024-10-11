@@ -1,0 +1,12 @@
+{% load static %}
+<li id="item{{ item.id }}" class="list-group-item d-flex justify-content-between align-items-center">
+    <div class="ms-2 me-auto">
+        <input type="checkbox" hx-post="{% url 'todo:toggle_item' item.id %}"
+               {% if item.completed %}checked{% endif %}>
+        <span>{{ item.description }}</span>
+    </div>
+    <a hx-get="{% url 'todo:delete_item' item.id %}" class="ms-2 btn btn-danger" hx-target="#item{{ item.id }}"
+       hx-swap="delete">
+        <img src="{% static 'icons/trash.svg' %}" alt="Remover">
+    </a>
+</li>

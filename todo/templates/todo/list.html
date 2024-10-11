@@ -1,0 +1,27 @@
+{% extends 'core/base.html' %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+    <ul id="list-entries" class="list-group">
+        {% if lists %}
+            {% for list in lists %}
+                {% include 'todo/partials/list_entry.html' %}
+            {% endfor %}
+        {% endif %}
+    </ul>
+
+    <form class="pt-3" method="post" hx-post="{% url 'todo:create_list' %}" hx-target="#list-entries"
+          hx-swap="beforeend">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-10">
+                {{ add_list_form.title|as_crispy_field }}
+            </div>
+            <div class="col-2">
+                <button type="submit" class="btn btn-primary w-100">Adicionar</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}
